@@ -9,9 +9,12 @@ const Navbar = () => {
 
   const features = countryNames.features;
   useEffect(() => {
-    setListOfCountries(features.map((element) => element.properties));
-
-
+    function getAndSortCountries() {
+      const countryArr = features.map((element) => element.properties)
+      countryArr.sort((a, b) => a.name.localeCompare(b.name))
+      setListOfCountries(countryArr);
+    }
+    getAndSortCountries()
   }, [features]);
 
 
@@ -25,7 +28,7 @@ const Navbar = () => {
 
       {
         listOfCountries &&
-        listOfCountries.sort().map((element, index) => (
+        listOfCountries.map((element, index) => (
           <option key={index} value={element.name}>
             {element.name} ({element.iso_a2})
           </option>
