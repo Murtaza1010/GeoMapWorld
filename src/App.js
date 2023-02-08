@@ -1,15 +1,15 @@
-import './App.css';
+
 import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import cities from 'cities.json';
 import useGeoLocation from './useGeoLocation';
 import Navbar from './components/Navigation/Navbar';
-import { SideBar } from './components/infoDisplayContainer.js/SideBar';
-
+import { SideBar } from './components/infoDisplayContainer/SideBar';
+import { FaTimes, FaBars } from 'react-icons/fa'
 // Import Elements 
-import { AppContainer, MapAndInfoTabContainer, MapContainerMine } from './App.elements';
+import { AppContainer, Navigation, CountriesList, CountriesInfo, MapContainerMine } from './App.elements';
 
 
 
@@ -21,30 +21,40 @@ const markerIcon = new L.Icon({
 });
 
 function App() {
-
-  const [center, setCenter] = useState({ lat: 51.500, lng: -0.1 });
-  const ZOOM_LEVEL = 7;
+  const [showSlideOutMenu, setShowSlideOutMenu] = useState(false);
+  const [menuIsOpen, setIsMenuOpen] = useState(true);
+  const [center, setCenter] = useState({ lat: 53.817773, lng: -1.53683 });
+  const ZOOM_LEVEL = 6;
   const mapRef = useRef();
+
+
+
 
   const location = useGeoLocation();
 
 
-  const myLocation = () => {
-    if (location.loaded && !location.error) {
-      mapRef.current.leafletElement.flyTo(
-        [location.coordinates.lat, location.coordinates.lng],
-        ZOOM_LEVEL,
-        { AnimationEffect: true }
-      )
-    } else {
-      alert(location.error.message);
-    }
-  }
+  // const myLocation = () => {
+  //   if (location.loaded && !location.error) {
+  //     mapRef.current.leafletElement.flyTo(
+  //       [location.coordinates.lat, location.coordinates.lng],
+  //       ZOOM_LEVEL,
+  //       { AnimationEffect: true }
+  //     )
+  //   } else {
+  //     alert(location.error.message);
+  //   }
+  // }
 
   return (
     <AppContainer>
-      <Navbar />
-      <MapAndInfoTabContainer>
+      <Navigation>
+        <CountriesList><Navbar /></CountriesList>
+        <CountriesInfo>
+          {<FaBars onClick={() => setShowSlideOutMenu(true)} />}
+        </CountriesInfo>
+        {<SideBar open={showSlideOutMenu} setOpen={setShowSlideOutMenu} close={() => setShowSlideOutMenu(false)} />}
+      </Navigation>
+      <MapContainerMine>
         <MapContainer
           center={center}
           zoom={ZOOM_LEVEL}
@@ -69,8 +79,9 @@ function App() {
             </Marker>
           )}
         </MapContainer>
-        <SideBar />
-      </MapAndInfoTabContainer>
+      </MapContainerMine>
+
+
 
     </AppContainer>
   );

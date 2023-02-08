@@ -2,14 +2,34 @@ import styled from "styled-components/macro";
 
 export const AppContainer = styled.div`
   display: flex;
-  flex-flow: column;
+  flex-flow: column wrap;
   gap: 5px;
-  height: 100%;
+  height: auto;
+  overflow: hidden;
 `;
 
-export const MapAndInfoTabContainer = styled.div`
-  display: grid;
-  grid-template-columns: 4fr 1fr;
+export const Navigation = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: snow;
+  /* padding: 16px; */
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: large;
+  position: relative;
+  transform: translate(5px);
+  border-radius: 10px;
+  z-index: 20;
+  box-shadow: 0px 3px 5px #e4e4e4;
+  gap: 2rem;
+  
+    .CountriesInfo {
+      background-color: red;
+    }
+
 
   // media Queries for tablet
   // @media screen and (max-width: 768px) {
@@ -17,8 +37,25 @@ export const MapAndInfoTabContainer = styled.div`
   // }
   // media Queries for phone
 `;
+
+export const CountriesList = styled.div`
+
+`
+export const CountriesInfo = styled.div`
+ height: 3rem;
+ width: 3rem;
+ align-items: center;
+
+ margin: 0.2rem;
+  /* z-index: 2; */
+
+  svg {
+    height: 3rem;
+    width: 4rem;
+  }
+`
 export const MapContainerMine = styled.div`
-  position: inherited;
+  z-index: 0;
 `;
 
 export const MyHeader = styled.h1``;
