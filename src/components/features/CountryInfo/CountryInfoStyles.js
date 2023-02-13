@@ -7,13 +7,14 @@ export const Table = styled.div`
     margin: 0 1em;
     font-weight: bold;
     font-size: large;
-    width: 85%;
-    height: 70vh;
+    width: 80%;
+    line-break: loose;
     transform: translate();
     border-radius: 2em;
     text-align: left;
     transition: all 0.1s ease-out;
     border: 2px solid lightgray;
+    
 th {
 
    font-size: larger;
@@ -23,6 +24,7 @@ td {
     margin: 10px;
     
 }
+
 
 
 `

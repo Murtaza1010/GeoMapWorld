@@ -4,7 +4,7 @@ import currentCountrySlice from '../../src/components/features/CountryInfo/curre
 
 
 export const store = configureStore({
-    reducer:{
-        countryInfoReducers: currentCountrySlice,
+    reducer: {
+        countryInfo: currentCountrySlice,
     }
 })

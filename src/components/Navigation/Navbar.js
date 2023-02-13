@@ -1,19 +1,32 @@
+// Libraries
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+// Element
 import { DropdownMenu } from "./Navbar.elements";
 
+// Data
 import countryNames from "../../resources/countryBorders.json";
-import { useDispatch } from "react-redux";
 import {
   addCurrentCountry,
   addCurrentIso,
+  selectedCountryName,
+  selectedIso2,
+  updateCountryInfo,
+  selectCountryInfo,
+  addCapital,
 } from "../features/CountryInfo/currentCountrySlice";
+import api from "../../api/api";
 
 const Navbar = () => {
+  const countryGeneralInfo = useSelector(selectCountryInfo);
+  // console.log(countryGeneralInfo);
+  const countryIso = useSelector(selectedIso2);
+  const countryName = useSelector(selectedCountryName);
+  // console.log(countryIso);
   const dispatch = useDispatch();
   const [listOfCountries, setListOfCountries] = useState([]);
-  const [currentCountry, setCurrrentCountry] = useState({});
 
   const features = countryNames.features;
   useEffect(() => {
@@ -21,14 +34,53 @@ const Navbar = () => {
       // initialization
       const countryArr = features.map((element) => element.properties);
       //https://www.freecodecamp.org/news/destructure-object-properties-using-array-map-in-react/
-      countryArr.sort((a, b) => a.name.localeCompare(b.name)); // sorting array based on countryname 
+      countryArr.sort((a, b) => a.name.localeCompare(b.name)); // sorting array based on countryname
       setListOfCountries(countryArr);
     }
     getAndSortCountries(); // decalartion
   }, [features]);
 
+  // Run the api Call at least once and then on change of countyrISO2
+  useEffect(() => {
+    async function runApiCall() {
+      if (countryIso) {
+        // make Api Request for country info
+        const resp = await api.countryGeneralInfo.byCountry(countryIso);
+        if (resp) {
+          dispatch(updateCountryInfo(resp.geonames[0]));
+        }
+      }
+    }
+    runApiCall();
+  }, [countryIso, countryNames]);
+
+  // API Call the feed the lat and lng to the weather api 
+  // the Api should be called only if there is a lat and lng data 
+  // the Api call should be called on every country change 
+
+
+
+
+  //if countryName has a value then get geoCoding for the selected Country's capital
+  useEffect(() => {
+    async function getCapitalCity() {
+
+      if (countryGeneralInfo && countryName) {
+        const resp = await api.countryGeneralInfo.geoCodeCapital(countryGeneralInfo.capital);
+        if (resp) {
+          dispatch(addCapital(resp[0]))
+
+        }
+      }
+
+    }
+    getCapitalCity();
+  }, [countryGeneralInfo, countryName]);
+
+
+
   // function that handles when dropdown menu is changed
-  function updateMyStore(event) {
+  async function updateMyStore(event) {
     event.preventDefault();
 
     let name; // this is array ["Afghanistan", "Af"]
@@ -37,18 +89,10 @@ const Navbar = () => {
     }
     dispatch(addCurrentCountry(name[0]));
     dispatch(addCurrentIso(name[1]));
-
-    // make Api Request for country info 
-
-
-    // save the value return from that API call into redux 
-
-
-
   }
 
   return (
-    <DropdownMenu onChange={(event) => updateMyStore(event)}>
+    <DropdownMenu onChange={(event) => updateMyStore(event)} >
       <option disabled>Select a Country...</option>
 
       {listOfCountries &&

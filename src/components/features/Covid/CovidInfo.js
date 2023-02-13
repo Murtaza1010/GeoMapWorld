@@ -1,45 +1,46 @@
 import React from 'react'
 import { CovidInfoContainer, CovidDataTable } from './CovidInfoStyles'
+import { addCovid } from '../CountryInfo/currentCountrySlice'
+import {
+    selectCovidInfo,
+    selectedCountryName,
+} from '../CountryInfo/currentCountrySlice'
+import api from '../../../api/api'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+
+
+const CovidInfo = () => {
+    const covidData = useSelector(selectCovidInfo)
+    const countryName = useSelector(selectedCountryName)
+    const dispatch = useDispatch()
 
 
 
 
+    // onChange of countryName the apicall runs
+    useEffect(() => {
+        async function covidApiCall() {
+            if (countryName) {
+                const resp = await api.countryGeneralInfo.covidInfo(countryName)
 
-const covidInfo = () => {
-  return (
+                if (resp.response[0]) {
+                    dispatch(addCovid(resp.response[0]))
+                    console.log(resp.response[0])
+
+                }
+
+            }
+        }
+        covidApiCall()
+    }, [countryName])
+
+    return (
         <CovidInfoContainer>
-            <CovidDataTable> 
-              <tr>
-                  <th>Country Name</th>
-                  <th>PussyLand</th>
-              </tr>
-              <tr>
-                  <td>population</td>
-                  <td>1223111</td>
-              </tr>
-              <tr>
-                  <td>Total Cases</td>
-                  <td>000</td>
-              </tr>
-              <tr>
-                  <td>Total Death</td>
-                  <td>en-GB,cy-GB,gd</td>
-              </tr>
-              <tr>
-                  <td>Total Recovered</td>
-                  <td>2635167</td>
-              </tr>
-              <tr>
-                  <td>Active Cases</td>
-                  <td>49.9028622252397</td>
-              </tr>
-              <tr>
-                  <td>Total Tests</td>
-                  <td>GBR</td>
-              </tr>
-
-            </CovidDataTable> 
-      </CovidInfoContainer >
-  )
+            {/* < */}
+            <h1>{covidData?.continent}</h1>
+        </CovidInfoContainer>
+    )
 }
-export default covidInfo
+
+export default CovidInfo

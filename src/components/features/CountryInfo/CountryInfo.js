@@ -1,86 +1,67 @@
 import React from 'react'
-import {Table} from './CountryInfoStyles';
+import { useSelector } from 'react-redux';
+import { Table } from './CountryInfoStyles';
+import { selectCountryInfo } from './currentCountrySlice';
 
 const CountryInfo = () => {
+    const data = useSelector(selectCountryInfo);
+
     return (
         <Table>
             <tr>
-                <th>key</th>
-                <th>Information</th>
-            </tr>
-            <tr>
-                <td>continent</td>
-                <td>EU</td>
+
+                <th>{data?.countryName} {data?.isoAlpha3}</th>
             </tr>
             <tr>
                 <td>capital</td>
-                <td>London</td>
+                <td>{data?.capital}</td>
             </tr>
+            <tr>
+                <td>continent</td>
+                <td>{data?.continent}</td>
+            </tr>
+
             <tr>
                 <td>languages</td>
-                <td>en-GB,cy-GB,gd</td>
-            </tr>
-            <tr>
-                <td>geonameId</td>
-                <td>2635167</td>
-            </tr>
-            <tr>
-                <td>south</td>
-                <td>49.9028622252397</td>
-            </tr>
-            <tr>
-                <td>isoAlpha3</td>
-                <td>GBR</td>
-            </tr>
-            <tr>
-                <td>north</td>
-                <td>59.3607741849963</td>
-            </tr>
-            <tr>
-                <td>fipsCode</td>
-                <td>UK</td>
+                <td>{data?.languages}</td>
             </tr>
             <tr>
                 <td>population</td>
-                <td>66488991</td>
+                <td>{data?.population}</td>
+            </tr>
+            <tr>
+                <td>currency Code</td>
+                <td>{data?.currencyCode}</td>
+            </tr>
+            <tr>
+                <td>area In SqKm</td>
+                <td>{data?.areaInSqKm}</td>
+            </tr>
+            <tr>
+                <td>isoAlpha3</td>
+                <td>{data?.isoAlpha3}</td>
+            </tr>
+            <tr>
+                <td>fipsCode</td>
+                <td>{data?.fipsCode}</td>
+            </tr>
+            <tr>
+                <td>south</td>
+                <td>{data?.south}</td>
+            </tr>
+
+            <tr>
+                <td>north</td>
+                <td>{data?.north}</td>
             </tr>
             <tr>
                 <td>east</td>
-                <td>1.7689121033873</td>
-            </tr>
-            <tr>
-                <td>isoNumeric</td>
-                <td>826</td>
-            </tr>
-            <tr>
-                <td>areaInSqKm</td>
-                <td>244820.0</td>
-            </tr>
-            <tr>
-                <td>countryCode</td>
-                <td>GB</td>
+                <td>{data?.east}</td>
             </tr>
             <tr>
                 <td>west</td>
-                <td>-8.61772077108559</td>
+                <td>{data?.west}</td>
             </tr>
-            <tr>
-                <td>countryName</td>
-                <td>United Kingdom</td>
-            </tr>
-            <tr>
-                <td>postalCodeFormat</td>
-                <td>@# #@@|@## #@@|@@# #@@|@@## #@@|@#@ #@@|@@#@ #@@|GIR0AA</td>
-            </tr>
-            <tr>
-                <td>continentName</td>
-                <td>Europe</td>
-            </tr>
-            <tr>
-                <td>currencyCode</td>
-                <td>GBP</td>
-            </tr>
-
         </Table>
     )
 }

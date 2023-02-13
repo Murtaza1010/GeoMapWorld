@@ -1,6 +1,11 @@
-import React from 'react'
-import { 
-    WidgetContainer, 
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import api from '../../../api/api';
+import { selectWeatherInfo, selectCapital, selectedCountryName } from '../CountryInfo/currentCountrySlice';
+import { addWeather } from '../CountryInfo/currentCountrySlice';
+
+import {
+    WidgetContainer,
     TextContainer,
     Temperature,
     CountryCode,
@@ -12,22 +17,46 @@ import {
 
 } from './WeatherInfoStyles';
 
-const WeatherInfo = () => {
-    return (
-        
-            <WidgetContainer>
-                <TextContainer>
-                    <Temperature><span>&ordm;</span></Temperature>
-                    <CountryCode></CountryCode>
-                    <WeatherCondition>n/a</WeatherCondition>
-                    <Humidity></Humidity>
-                    <DateTime>2023-02-06 16:50:00</DateTime>
-                    <Clouds>clouds and visibility OK</Clouds>
-                    <StationName></StationName>
-                </TextContainer>
-            </WidgetContainer>
 
-        
+
+
+
+const WeatherInfo = () => {
+    const weatherData = useSelector(selectWeatherInfo)
+    const countryName = useSelector(selectedCountryName)
+    const capitalData = useSelector(selectCapital)
+    const dispatch = useDispatch()
+
+
+
+    useEffect(() => {
+        async function weatherApiCall() {
+            if (countryName && capitalData) {
+                const resp = await api.countryGeneralInfo.weatherByCapitalLatLong(capitalData.lat, capitalData.lon)
+                if (resp) {
+                    dispatch(addWeather(resp.weatherObservation))
+                }
+            }
+        }
+        weatherApiCall()
+    }, [countryName, capitalData])
+
+
+    return (
+
+        <WidgetContainer>
+            <TextContainer>
+                <Temperature> {weatherData?.temperature || ''}<span>&ordm;</span></Temperature>
+                <CountryCode>{weatherData?.countryCode || ''}</CountryCode>
+                <WeatherCondition>{weatherData?.weatherCondition || ''}</WeatherCondition>
+                <Humidity>Humidity: {weatherData?.humidity || ''}</Humidity>
+                <DateTime>{weatherData?.datetime || ''}</DateTime>
+                <Clouds>Clouds: {weatherData?.clouds || ''}</Clouds>
+                <StationName>{weatherData?.stationName || ''}</StationName>
+            </TextContainer>
+        </WidgetContainer>
+
+
     )
 }
 

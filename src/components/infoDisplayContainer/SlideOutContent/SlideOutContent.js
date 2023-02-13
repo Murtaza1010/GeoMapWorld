@@ -4,13 +4,13 @@ import WeatherInfo from '../../features/Weather/WeatherInfo';
 import CovidInfo from '../../features/Covid/CovidInfo';
 
 
-const SlideOutContent = ({geoInfo, weatherInfo, covidInfo}) => {
+const SlideOutContent = ({ geoInfo, weatherInfo, covidInfo }) => {
   console.log(geoInfo)
   return (
     <>
-      {geoInfo ? <CountryInfo/> : null }
-      {weatherInfo && <WeatherInfo/>}
-      {covidInfo && <CovidInfo />}  
+      {geoInfo ? <CountryInfo /> : null}
+      {weatherInfo && <WeatherInfo />}
+      {covidInfo && <CovidInfo />}
     </>
   )
 }
