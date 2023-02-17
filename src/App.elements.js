@@ -6,6 +6,7 @@ export const AppContainer = styled.div`
   gap: 5px;
   height: auto;
   overflow: hidden;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 `;
 
 export const Navigation = styled.div`
@@ -26,9 +27,6 @@ export const Navigation = styled.div`
   box-shadow: 0px 3px 5px #e4e4e4;
   gap: 2rem;
   
-    .CountriesInfo {
-      background-color: red;
-    }
 
 
   // media Queries for tablet

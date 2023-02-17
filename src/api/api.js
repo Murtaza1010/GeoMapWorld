@@ -1,6 +1,7 @@
 const countryInfoUrl = process.env.REACT_APP_COUNTRY_INFO
 const userNameGeoNames = process.env.REACT_APP_MY_USERNAME
 const weatherInfoUrl = process.env.REACT_APP_WEATHER_INFO
+const flagApi = process.env.REACT_APP_FLAG_API
 
 // conerating raw api response to somethign that we can use
 async function checkAndReturn(resp) {
@@ -19,6 +20,25 @@ export const countryGeneralInfo = {
         const data = checkAndReturn(resp)
         return data
     },
+    async countryFlag(country) {
+        // const resp = await fetch(`${flagApi}${country}`)
+
+        // // const data = checkAndReturn(resp)
+        // return resp
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch(`https://countryflagsapi.com/png/${country}`, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    },
+
+
+
+
     async geoCodeCapital(capital) { //  returns lat and lng points for the capital of 
         const option = {
             method: 'GET',
@@ -61,6 +81,7 @@ export const countryGeneralInfo = {
 
 
     },
+
 }
 const api = { countryGeneralInfo }
 export default api
