@@ -1,19 +1,22 @@
 import React from 'react'
 import {
     CovidInfoContainer,
-    Row,
     Title,
-    Column,
-    Heading,
     SubHeadingButtons,
     Cases,
     Deaths,
     Tests,
+    Column,
+    Case,
+    Death,
+    Test,
 } from './CovidInfoStyles'
 import { addCovid } from '../CountryInfo/currentCountrySlice'
 import {
     selectCovidInfo,
     selectedCountryName,
+    selectedIso2,
+    selectedIso3
 } from '../CountryInfo/currentCountrySlice'
 import api from '../../../api/api'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,9 +24,16 @@ import { useEffect } from 'react'
 import { FaSortDown } from 'react-icons/fa'
 import { useState } from 'react'
 
+
+
+
+
+
 const CovidInfo = () => {
     const covidData = useSelector(selectCovidInfo)
     const countryName = useSelector(selectedCountryName)
+    const countryISo = useSelector(selectedIso2)
+    const countryIso3 = useSelector(selectedIso3);
     const dispatch = useDispatch()
     const [showCase, setShowCase] = useState(false)
     const [showDeaths, setShowDeaths] = useState(false)
@@ -47,13 +57,26 @@ const CovidInfo = () => {
 
     // onChange of countryName the apicall runs
     useEffect(() => {
+        function hasWhiteSpace(s) {
+            return (/\s/).test(s);
+        }
         async function covidApiCall() {
             if (countryName) {
+
+
+
                 const resp = await api.countryGeneralInfo.covidInfo(countryName)
 
+
+                // console.log(respCountryIso3)
+
+
                 if (resp.response[0]) {
+                    // console.log("countryName used for Covid ")
                     dispatch(addCovid(resp.response[0]))
                 }
+
+
             }
         }
         covidApiCall()
@@ -80,7 +103,7 @@ const CovidInfo = () => {
                 </Tests>
             </SubHeadingButtons>
             {showCase && (
-                <Row>
+                <Case>
                     <Column>
                         <h4>Active</h4>
                         <p>{covidData?.cases.active || null}</p>
@@ -106,10 +129,10 @@ const CovidInfo = () => {
                         <p>{covidData?.cases.total || ''}</p>
                     </Column>
 
-                </Row>
-            )} 
+                </Case>
+            )}
             {showDeaths && (
-                <Row>
+                <Death>
                     <Column>
                         <h4>New</h4>
                         <p>{covidData?.deaths.new || null}</p>
@@ -118,16 +141,16 @@ const CovidInfo = () => {
                         <h4>Total</h4>
                         <p>{covidData?.deaths.total || null}</p>
                     </Column>
-                </Row>
-            
+                </Death>
+
             )}
             {showTests && (
-                <Row>
+                <Test>
                     <Column>
-                    <h4>Total</h4>
-                    <p>{covidData?.tests.total || ''}</p>
+                        <h4>Total</h4>
+                        <p>{covidData?.tests.total || ''}</p>
                     </Column>
-                </Row>
+                </Test>
             )}
 
         </CovidInfoContainer>

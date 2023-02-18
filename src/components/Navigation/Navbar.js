@@ -11,6 +11,7 @@ import countryNames from "../../resources/countryBorders.json";
 import {
   addCurrentCountry,
   addCurrentIso,
+  addCurrentIso3,
   selectedCountryName,
   selectedIso2,
   updateCountryInfo,
@@ -19,7 +20,7 @@ import {
 } from "../features/CountryInfo/currentCountrySlice";
 import api from "../../api/api";
 
-const Navbar = () => {
+const Navbar = ({ setShowSlideOutMenu }) => {
   const countryGeneralInfo = useSelector(selectCountryInfo);
   // console.log(countryGeneralInfo);
   const countryIso = useSelector(selectedIso2);
@@ -59,8 +60,6 @@ const Navbar = () => {
   // the Api call should be called on every country change 
 
 
-
-
   //if countryName has a value then get geoCoding for the selected Country's capital
   useEffect(() => {
     async function getCapitalCity() {
@@ -89,6 +88,8 @@ const Navbar = () => {
     }
     dispatch(addCurrentCountry(name[0]));
     dispatch(addCurrentIso(name[1]));
+    dispatch(addCurrentIso3(name[2]));
+    setShowSlideOutMenu(true)
   }
 
   return (
@@ -97,7 +98,7 @@ const Navbar = () => {
 
       {listOfCountries &&
         listOfCountries.map((element, index) => (
-          <option key={index} value={`${element.name},${element.iso_a2}`}>
+          <option key={index} value={`${element.name},${element.iso_a2},${element.iso_a3}`}>
             {element.name} ({element.iso_a2})
           </option>
         ))}

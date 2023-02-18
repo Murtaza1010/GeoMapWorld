@@ -48,12 +48,13 @@ function App() {
   return (
     <AppContainer>
       <Navigation>
-        <CountriesList><Navbar /></CountriesList>
+        <CountriesList><Navbar setShowSlideOutMenu={setShowSlideOutMenu} /></CountriesList>
         <CountriesInfo>
           {<FaBars onClick={() => setShowSlideOutMenu(true)} />}
         </CountriesInfo>
         {<SideBar open={showSlideOutMenu} setOpen={setShowSlideOutMenu} close={() => setShowSlideOutMenu(false)} />}
       </Navigation>
+
       <MapContainerMine>
         <MapContainer
           center={center}

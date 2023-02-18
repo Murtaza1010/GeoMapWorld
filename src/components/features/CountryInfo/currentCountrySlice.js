@@ -6,6 +6,7 @@ const currentCountrySlice = createSlice({
     initialState: {
         name: "",
         iso_a2: '',
+        iso_a3: '',
         countryGeneralInfo: {},
         countryFlag: {},
         capital: {},
@@ -16,6 +17,9 @@ const currentCountrySlice = createSlice({
     reducers: {
         addCurrentCountry(state, action) {
             state.name = action.payload;
+        },
+        addCurrentIso3(state, action) {
+            state.iso_a3 = action.payload
         },
         updateCountryInfo(state, action) {
             state.countryGeneralInfo = action.payload;
@@ -39,8 +43,9 @@ const currentCountrySlice = createSlice({
     }
 
 })
-export const { addCurrentCountry, updateCountryInfo, addFlags, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
+export const { addCurrentCountry, addCurrentIso3, updateCountryInfo, addFlags, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
 export const selectedIso2 = (state) => state.countryInfo.iso_a2
+export const selectedIso3 = (state) => state.countryInfo.iso_a3
 export const selectedCountryName = (state) => state.countryInfo.name
 export const selectCountryInfo = (state) => state.countryInfo.countryGeneralInfo
 export const selectFlag = (state) => state.countryInfo.countryFlag;

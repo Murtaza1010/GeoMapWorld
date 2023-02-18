@@ -5,6 +5,7 @@ import { Table, Title, Image, Data } from './CountryInfoStyles';
 import { addFlags, selectCountryInfo, selectedIso2, selectFlag, selectedCountryName } from './currentCountrySlice';
 import markerIcon from '../../../resources/images/markericon.png'
 import api from '../../../api/api';
+import ReactCountryFlag from "react-country-flag"
 
 const CountryInfo = () => {
 
@@ -14,25 +15,37 @@ const CountryInfo = () => {
     const dispatch = useDispatch();
     const countryFlag = useSelector(selectFlag);
 
-    const countryFlagSrc = '';
+    // const countryFlagSrc = '';
 
-    useEffect(() => {
-        async function flagApiCall() {
-            if (countryIso) {
-                const resp = await api.countryGeneralInfo.countryFlag(countryIso)
+    // useEffect(() => {
+    //     async function flagApiCall() {
+    //         if (countryIso) {
+    //             const resp = await api.countryGeneralInfo.countryFlag(countryIso)
 
-                dispatch(addFlags(resp))
-            }
-        }
-        flagApiCall()
-    }, [countryIso])
+    //             dispatch(addFlags(resp))
+    //         }
+    //     }
+    //     flagApiCall()
+    // }, [countryIso])
+
+    //  updated tghe country Flag 
+
     // api calls returns data in the form of png, DOM cannot read it, so i have to convert make it readable
 
     return (
         <Table>
             <Title><th>{data?.countryName} {data?.isoAlpha3}</th></Title>
-            <Image><img src={markerIcon} alt='flag' width="200"
-                height="200" /></Image>
+            <Image>
+                <ReactCountryFlag
+                    countryCode={countryIso}
+                    svg
+                    style={{
+                        width: '8em',
+                        height: '8em',
+                    }}
+                    title={countryName}
+                />
+            </Image>
 
 
             <Data>
