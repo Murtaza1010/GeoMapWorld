@@ -88,7 +88,7 @@ const Navbar = ({ setShowSlideOutMenu }) => {
     }
     dispatch(addCurrentCountry(name[0]));
     dispatch(addCurrentIso(name[1]));
-    dispatch(addCurrentIso3(name[2]));
+
     setShowSlideOutMenu(true)
   }
 
