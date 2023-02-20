@@ -123,3 +123,17 @@ export const Clouds = styled.div`
 export const StationName = styled.div`
 
 `
+export const AstronomyContainer = styled.div`
+`
+
+export const Sunrise = styled.div`
+background-image: url(icons8-sunrise.gif);
+
+`
+export const Sunset = styled.div`
+`
+
+export const Moonrise = styled.div`
+`
+export const Moonset = styled.div`
+`

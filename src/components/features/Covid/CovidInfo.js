@@ -27,8 +27,8 @@ import { useState } from "react";
 const CovidInfo = () => {
     const covidData = useSelector(selectCovidInfo);
     const countryName = useSelector(selectedCountryName);
-    const countryISo = useSelector(selectedIso2);
-    const countryIso3 = useSelector(selectedIso3);
+    // const countryISo = useSelector(selectedIso2);
+    // const countryIso3 = useSelector(selectedIso3);
     const dispatch = useDispatch();
     const [showCase, setShowCase] = useState(false);
     const [showDeaths, setShowDeaths] = useState(false);
@@ -52,9 +52,10 @@ const CovidInfo = () => {
 
     // onChange of countryName the apicall runs
     // country names containing white-spaces are recognised to triggering the api call
-    // CountryCodes Is02, Iso3 maybe Did not work
+    // CountryCodes Is02, Iso3  Did not work
     // Come up with new CountryCode maybe
-    //
+    //https://stackoverflow.com/questions/1731190/check-if-a-string-has-white-space
+
     useEffect(() => {
         function hasWhiteSpace(s) {
             return (/\s/).test(s);

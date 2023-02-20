@@ -9,6 +9,7 @@ const currentCountrySlice = createSlice({
         iso_a3: '',
         countryGeneralInfo: {},
         countryFlag: {},
+        countryAstronomy: {},
         capital: {},
         weather: {},
         covidInfo: {},
@@ -27,6 +28,9 @@ const currentCountrySlice = createSlice({
         addFlags(state, action) {
             state.countryFlag = action.payload;
         },
+        addCountryAstronomy(state, action) {
+            state.countryAstronomy = action.payload;
+        },
         addCurrentIso(state, action) {
             state.iso_a2 = action.payload;
         },
@@ -43,12 +47,13 @@ const currentCountrySlice = createSlice({
     }
 
 })
-export const { addCurrentCountry, addCurrentIso3, updateCountryInfo, addFlags, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
+export const { addCurrentCountry, addCurrentIso3, updateCountryInfo, addFlags, addCountryAstronomy, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
 export const selectedIso2 = (state) => state.countryInfo.iso_a2
 export const selectedIso3 = (state) => state.countryInfo.iso_a3
 export const selectedCountryName = (state) => state.countryInfo.name
 export const selectCountryInfo = (state) => state.countryInfo.countryGeneralInfo
 export const selectFlag = (state) => state.countryInfo.countryFlag;
+export const selectCountryAstronomy = (state) => state.countryInfo.countryAstronomy;
 export const selectCapital = (state) => state.countryInfo.capital;
 export const selectWeatherInfo = (state) => state.countryInfo.weather;
 export const selectCovidInfo = (state) => state.countryInfo.covidInfo;

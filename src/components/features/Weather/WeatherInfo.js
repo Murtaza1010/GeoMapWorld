@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import api from '../../../api/api';
-import { selectWeatherInfo, selectCapital, selectedCountryName } from '../CountryInfo/currentCountrySlice';
+import { selectWeatherInfo, selectCapital, selectedCountryName, addCountryAstronomy, selectCountryAstronomy } from '../CountryInfo/currentCountrySlice';
 import { addWeather } from '../CountryInfo/currentCountrySlice';
 
 import {
@@ -14,6 +14,12 @@ import {
     DateTime,
     Clouds,
     StationName,
+    AstronomyContainer,
+    Sunrise,
+    Sunset,
+    Moonrise,
+    Moonset,
+
 
 } from './WeatherInfoStyles';
 
@@ -26,8 +32,9 @@ const WeatherInfo = () => {
     const countryName = useSelector(selectedCountryName)
     const capitalData = useSelector(selectCapital)
     const dispatch = useDispatch()
+    const countryAstronomy = useSelector(selectCountryAstronomy)
 
-
+    console.log(countryAstronomy)
 
     useEffect(() => {
         async function weatherApiCall() {
@@ -41,6 +48,19 @@ const WeatherInfo = () => {
         weatherApiCall()
     }, [countryName, capitalData])
 
+    useEffect(() => {
+        async function countryAstronomyApiCall() {
+            if (countryName && capitalData) {
+                const resp = await api.countryGeneralInfo.countryAstronomy(capitalData.lat, capitalData.lon)
+                console.log(resp)
+                if (resp) {
+                    dispatch(addCountryAstronomy(resp))
+                }
+            }
+        }
+        countryAstronomyApiCall()
+    }, [countryName, capitalData])
+
 
     return (
 
@@ -52,7 +72,14 @@ const WeatherInfo = () => {
                 <Humidity>Humidity: {weatherData?.humidity || ''}</Humidity>
                 <DateTime>{weatherData?.datetime || ''}</DateTime>
                 <Clouds>Clouds: {weatherData?.clouds || ''}</Clouds>
-                <StationName>{weatherData?.stationName || ''}</StationName>
+                <StationName>{weatherData?.stationName || ''} </StationName>
+                <AstronomyContainer>
+                    <Sunrise><img src='icons8-sunrise.gif'></img> {countryAstronomy?.sunrise || ''}</Sunrise>
+                    <Sunset>{countryAstronomy?.sunset || ''}</Sunset>
+                    <Moonrise>{countryAstronomy?.moonrise || ''}</Moonrise>
+                    <Moonset>{countryAstronomy?.moonset || ''}</Moonset>
+                </AstronomyContainer>
+
             </TextContainer>
         </WidgetContainer>
 

@@ -2,6 +2,9 @@ const countryInfoUrl = process.env.REACT_APP_COUNTRY_INFO
 const userNameGeoNames = process.env.REACT_APP_MY_USERNAME
 const weatherInfoUrl = process.env.REACT_APP_WEATHER_INFO
 const flagApi = process.env.REACT_APP_FLAG_API
+const countryAstronomyApi = process.env.REACT_APP_COUNTRY_ASTRONOMY_API
+const countryAstronomyApiKey = process.env.REACT_APP_COUNTRY_ASTRONOMY_KEY
+
 
 // conerating raw api response to somethign that we can use
 async function checkAndReturn(resp) {
@@ -20,20 +23,26 @@ export const countryGeneralInfo = {
         const data = checkAndReturn(resp)
         return data
     },
-    async countryFlag(country) {
-        // const resp = await fetch(`${flagApi}${country}`)
+    // async countryFlag(country) {
+    //     // const resp = await fetch(`${flagApi}${country}`)
 
-        // // const data = checkAndReturn(resp)
-        // return resp
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-        };
+    //     // // const data = checkAndReturn(resp)
+    //     // return resp
+    //     var requestOptions = {
+    //         method: 'GET',
+    //         redirect: 'follow'
+    //     };
 
-        fetch(`https://countryflagsapi.com/png/${country}`, requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
+    //     fetch(`https://countryflagsapi.com/png/${country}`, requestOptions)
+    //         .then(response => response.text())
+    //         .then(result => console.log(result))
+    //         .catch(error => console.log('error', error));
+    // },
+    async countryAstronomy(lat, lng) {
+        const resp = await fetch(`${countryAstronomyApi}apiKey=${countryAstronomyApiKey}&lat=${lat}&long=${lng}`)
+        const data = checkAndReturn(resp)
+        return data
+
     },
 
 
