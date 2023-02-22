@@ -127,7 +127,7 @@ export const AstronomyContainer = styled.div`
 `
 
 export const Sunrise = styled.div`
-background-image: url(icons8-sunrise.gif);
+
 
 `
 export const Sunset = styled.div`
