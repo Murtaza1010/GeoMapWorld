@@ -4,6 +4,7 @@ const weatherInfoUrl = process.env.REACT_APP_WEATHER_INFO
 const flagApi = process.env.REACT_APP_FLAG_API
 const countryAstronomyApi = process.env.REACT_APP_COUNTRY_ASTRONOMY_API
 const countryAstronomyApiKey = process.env.REACT_APP_COUNTRY_ASTRONOMY_KEY
+const cityUrl = process.env.REACT_APP_CITY_API
 
 
 // conerating raw api response to somethign that we can use
@@ -74,6 +75,36 @@ export const countryGeneralInfo = {
         return data
 
     },
+    async citiesNearBy(north, south, east, west) {
+        const resp = await fetch(`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=en&username=${userNameGeoNames}`)
+        // const data = await resp.json()
+        const data = checkAndReturn(resp)
+
+        return data
+    },
+    // async citiesNearBy(lng, lat) {
+    //     let lngStatus;
+    //     if (lng >= 0) {
+    //         lngStatus = '+'
+    //     }
+    //     let latStatus
+    //     if (lat >= 0) {
+    //         latStatus = '+'
+    //     }
+
+    //     const options = {
+    //         method: 'GET',
+    //         headers: {
+    //             'X-RapidAPI-Key': 'a772b7be22msh4cf849c381529bep175234jsn1d1ca5f7f09a',
+    //             'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+    //         }
+    //     };
+
+    //     const resp = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${lngStatus}${lng}${latStatus}${lat}/nearbyCities?radius=100`, options)
+    //     const citiesData = await resp.json()
+
+    //     return citiesData
+
     async covidInfo(country) {
         const options = {
             method: 'GET',

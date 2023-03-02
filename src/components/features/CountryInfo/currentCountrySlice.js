@@ -4,13 +4,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const currentCountrySlice = createSlice({
     name: 'countryInfo',
     initialState: {
-        name: "",
-        iso_a2: '',
+        name: "Afghanistan",
+        iso_a2: 'AF',
         iso_a3: '',
-        countryGeneralInfo: {},
+        countryGeneralInfo: {
+
+        },
+        citiesNearBy: {},
         countryFlag: {},
         countryAstronomy: {},
-        capital: {},
+        capital: {
+
+        },
         weather: {},
         covidInfo: {},
 
@@ -42,12 +47,15 @@ const currentCountrySlice = createSlice({
         },
         addCovid(state, action) {
             state.covidInfo = action.payload;
+        },
+        addCities(state, action) {
+            state.citiesNearBy = action.payload;
         }
 
     }
 
 })
-export const { addCurrentCountry, addCurrentIso3, updateCountryInfo, addFlags, addCountryAstronomy, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
+export const { addCurrentCountry, addCurrentIso3, addCities, updateCountryInfo, addFlags, addCountryAstronomy, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
 export const selectedIso2 = (state) => state.countryInfo.iso_a2
 export const selectedIso3 = (state) => state.countryInfo.iso_a3
 export const selectedCountryName = (state) => state.countryInfo.name
@@ -57,4 +65,5 @@ export const selectCountryAstronomy = (state) => state.countryInfo.countryAstron
 export const selectCapital = (state) => state.countryInfo.capital;
 export const selectWeatherInfo = (state) => state.countryInfo.weather;
 export const selectCovidInfo = (state) => state.countryInfo.covidInfo;
+export const selectCities = (state) => state.countryInfo.citiesNearBy;
 export default currentCountrySlice.reducer;

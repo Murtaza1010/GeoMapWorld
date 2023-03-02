@@ -38,7 +38,7 @@ const WeatherInfo = () => {
     const dispatch = useDispatch()
     const countryAstronomy = useSelector(selectCountryAstronomy)
 
-    console.log(countryAstronomy)
+
 
     useEffect(() => {
         async function weatherApiCall() {

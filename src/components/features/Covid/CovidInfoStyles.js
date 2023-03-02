@@ -5,12 +5,13 @@ export const CovidInfoContainer = styled.div`
   padding: 1em;
   margin: 0 1em;
   font-weight: bold;
-  font-size: large;
+  font-size: larger;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   width: 80%;
 
   transform: translate(5px);
   border-radius: 2em;
-  text-align: left;
+  
   transition: all 0.1s ease-out;
   border: 2px solid lightgray;
   display: flex;
@@ -135,24 +136,22 @@ export const Tests = styled.button`
 `;
 
 export const Column = styled.div`
-  float: left;
+  padding: 0.3em;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   /* background-color: #f4f7f7; */
-  width: 100%;
+  /* width: 100%; */
   border: 1px dashed #85d2f1;
   border-spacing: 0.5em;
   border-style: solid dotted;
   border-bottom-width: 2px;
   border-radius: 1em;
-  backface-visibility: visible;
+
   word-spacing: 1em;
   line-height: 5px;
 
-  & p {
-    margin: 5px;
-  }
+
 `;
 export const Case = styled.div`
   
@@ -189,4 +188,7 @@ export const Test = styled.div`
   border-radius: 1em;
   backface-visibility: visible;
   word-spacing: 1em;
-  line-height: 5px;`;
+  line-height: 5px;
+  
+  `;
+

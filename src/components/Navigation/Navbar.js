@@ -90,6 +90,7 @@ const Navbar = ({ setShowSlideOutMenu }) => {
     dispatch(addCurrentIso(name[1]));
 
     setShowSlideOutMenu(true)
+
   }
 
   return (
