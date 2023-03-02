@@ -22,6 +22,10 @@ import {
 
 
 } from './WeatherInfoStyles';
+import SunriseIcon from '../../../resources/images/sun.gif';
+import NightIcon from '../../../resources/images/night.gif';
+import MoonriseIcon from '../../../resources/images/moonrise.gif';
+import MoonsetIcon from '../../../resources/images/moonset.png';
 
 
 
@@ -74,10 +78,10 @@ const WeatherInfo = () => {
                 <Clouds>Clouds: {weatherData?.clouds || ''}</Clouds>
                 <StationName>{weatherData?.stationName || ''} </StationName>
                 <AstronomyContainer>
-                    <Sunrise><img src='icons8-sunrise.gif'></img> {countryAstronomy?.sunrise || ''}</Sunrise>
-                    <Sunset>{countryAstronomy?.sunset || ''}</Sunset>
-                    <Moonrise>{countryAstronomy?.moonrise || ''}</Moonrise>
-                    <Moonset>{countryAstronomy?.moonset || ''}</Moonset>
+                    <Sunrise><img src={SunriseIcon}></img> {countryAstronomy?.sunrise || ''}</Sunrise>
+                    <Sunset><img src={NightIcon}></img>{countryAstronomy?.sunset || ''}</Sunset>
+                    <Moonrise><img src={MoonriseIcon}></img>{countryAstronomy?.moonrise || ''}</Moonrise>
+                    <Moonset><img src={MoonsetIcon}></img>{countryAstronomy?.moonset || ''}</Moonset>
                 </AstronomyContainer>
 
             </TextContainer>
