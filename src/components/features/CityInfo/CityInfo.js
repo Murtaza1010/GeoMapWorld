@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
 import {
@@ -9,27 +9,36 @@ import {
     Coords,
 }
     from './CityInfoStyles';
+import populationIcon from '../../../resources/images/populationIcon.png';
+import countryIcon from '../../../resources/images/country.png'
+import { useSelector } from 'react-redux';
+import { selectCities } from '../CountryInfo/currentCountrySlice';
+import { useEffect } from 'react';
 
 
 
+const CityInfo = ({ city }) => {
+    console.log(city)
 
-const CityInfo = () => {
     return (
         <CityInfoContainer>
             <Top>
-                <h1>CityName</h1>
+                {city?.name}
 
             </Top>
             <Body>
+
                 <Titles>
-                    <h2>CountryCode:</h2>
-                    <h2>Population:</h2>
-                    <h2>wikipedia: </h2>
+                    <h2><img src={countryIcon} />{city?.countrycode}</h2>
+                    <h2><img src={populationIcon} /> {city?.population}</h2>
+
                 </Titles>
                 <Coords>
-                    <h3>Lat:</h3>
-                    <h3>Lng:</h3>
+                    <h3>Lat:  {city?.lat}</h3>
+                    <h3>Lng: {city?.lng}</h3>
+                    <p>wikipedia: {city?.wikipedia}</p>
                 </Coords>
+
 
 
 

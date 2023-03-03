@@ -10,7 +10,7 @@ import {
 
 } from "react-leaflet";
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { FaTimes, FaBars } from "react-icons/fa";
@@ -23,7 +23,7 @@ import {
   MapContainerMine,
 } from "./App.elements";
 
-import { selectCapital, selectCountryInfo, selectCovidInfo } from "./components/features/CountryInfo/currentCountrySlice";
+import { addCities, selectCities, selectCapital, selectCountryInfo, selectCovidInfo } from "./components/features/CountryInfo/currentCountrySlice";
 import countryBorders from '../src/resources/countryBorders.json'
 import useGeoLocation from "./useGeoLocation";
 import Navbar from "./components/Navigation/Navbar";
@@ -69,6 +69,8 @@ function App() {
   const mapRef = useRef();
   const purpleOptions = { color: 'purple' }
   const countryInfo = useSelector(selectCountryInfo)
+  const dispatch = useDispatch()
+  const citiesData = useSelector(selectCities)
 
 
 
@@ -79,12 +81,15 @@ function App() {
       if (countryInfo.north && countryInfo.east) {
         const resp = await api.countryGeneralInfo.citiesNearBy(countryInfo.north, countryInfo.south, countryInfo.east, countryInfo.west)
         if (resp) {
-          console.log(resp)
+
+          dispatch(addCities(resp.geonames))
         }
       }
     }
     CityApiCall()
   }, [countryInfo]);
+
+
 
 
 
@@ -97,6 +102,7 @@ function App() {
       setCenter({ lat: capitalLatLon.lat, lng: capitalLatLon.lon });
     }
   }, [capitalLatLon]);
+
 
   const HandleClickMap = ({ center }) => {
     const map = useMap();
@@ -164,23 +170,24 @@ function App() {
           <Polygon pathOptions={purpleOptions} positions={multiPolygon} />
           {center && <HandleClickMap center={center} />}
 
-          {/* L.control.maptilerGeocoding({
-            apiKey: key,
-          placeHolder: '',
-          collapsed: true,
-          country: 'at',
-            
-          }.addTo(map)); */}
-
-          {/* {location.loaded && !location.error && (
+          {citiesData ? Object.values(citiesData).map((element, index) => (
             <Marker
               icon={markerIcon}
               position={
-                center
-              }>
-              <Popup>you are Here</Popup>
+                [element.lat, element.lng]
+              }
+              key={index}
+
+            >
+              <Popup>
+                <CityInfo city={element} />
+              </Popup>
             </Marker>
-          )} */}
+
+          )) : null}
+
+
+
         </MapContainer>
       </MapContainerMine>
     </AppContainer>
