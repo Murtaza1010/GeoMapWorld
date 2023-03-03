@@ -113,7 +113,7 @@ const CovidInfo = () => {
                 <Case>
                     <Column>
                         <h4>Active</h4>
-                        <p>{covidData?.cases.active || null}</p>
+                        <p>{covidData?.cases.active !== undefined ? covidData?.cases.active : null}</p>
                     </Column>
 
                     {covidData?.cases.new ? (

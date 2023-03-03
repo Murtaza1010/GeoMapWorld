@@ -112,13 +112,13 @@ function App() {
       map.setView(center, map.getZoom());
     }
 
-    return center.lat === undefined ? null : (
-      <Marker position={center} icon={markerIcon}>
-        <Popup>
-          <CityInfo></CityInfo>
-        </Popup>
-      </Marker>
-    );
+    // return center.lat === undefined ? null : (
+    //   <Marker position={center} icon={markerIcon}>
+    //     <Popup>
+    //       <CityInfo></CityInfo>
+    //     </Popup>
+    //   </Marker>
+    // );
   };
   const multiPolygon = countryBorders.features[0].geometry.coordinates
 
@@ -160,7 +160,7 @@ function App() {
           zoom={ZOOM_LEVEL}
           scrollWheelZoom={true}
           ref={mapRef}
-          style={{ height: "92vh" }}
+          style={{ height: "91.71vh" }}
         >
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a>, Contains OS data © Crown copyright and database right 2022'
