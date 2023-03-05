@@ -3,31 +3,26 @@ import styled from "styled-components/macro";
 
 export const CityInfoContainer = styled.div`
   background-color: snow;
-  padding: 1em;
+  padding: 0.5em;
 
   font-weight: bolder;
   font-size: larger;
-    width: fit-content;
+  max-width: fit-content;
   border-radius: 1em;
-  
   transition: all 0.1s ease-out;
-  
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-flow: column wrap;
-  
   font-family: Georgia, "Times New Roman", Times, serif;
 `;
 
 export const Top = styled.div`
   letter-spacing: 2px;
   font-weight: bolder;
-  font-size: larger;
+  font-size: x-large;
   
-  text-shadow: 1em #85d2f1;
-    padding: 5px;
-  text-shadow: 1px #85d2f1;
+  padding: 1em;
 
   border: 2px dashed #85d2f1;
   border-spacing: 0.5em;
@@ -36,13 +31,17 @@ export const Top = styled.div`
   border-radius: 1em;
   backface-visibility: visible;
   word-spacing: 1em;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
 `
 
 
 
 export const Body = styled.div`
 display: flex;
-justify-content: flex-start;
+justify-content: center;
 align-items: center;
 flex-direction: column;
 

@@ -5,6 +5,7 @@ const flagApi = process.env.REACT_APP_FLAG_API
 const countryAstronomyApi = process.env.REACT_APP_COUNTRY_ASTRONOMY_API
 const countryAstronomyApiKey = process.env.REACT_APP_COUNTRY_ASTRONOMY_KEY
 const cityUrl = process.env.REACT_APP_CITY_API
+const timeUrl = process.env.REACT_APP_COUNTRY_TIME_API
 
 
 // conerating raw api response to somethign that we can use
@@ -24,6 +25,8 @@ export const countryGeneralInfo = {
         const data = checkAndReturn(resp)
         return data
     },
+
+
     // async countryFlag(country) {
     //     // const resp = await fetch(`${flagApi}${country}`)
 
@@ -45,7 +48,12 @@ export const countryGeneralInfo = {
         return data
 
     },
+    async countryTime(lat, lng) {
+        const resp = await fetch(`${timeUrl}lat=${lat}&lng=${lng}&username=${userNameGeoNames}`)
+        const data = checkAndReturn(resp)
+        return data
 
+    },
 
 
 

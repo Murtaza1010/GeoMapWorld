@@ -30,6 +30,7 @@ import Navbar from "./components/Navigation/Navbar";
 import { SideBar } from "./components/infoDisplayContainer/SideBar";
 import CityInfo from "./components/features/CityInfo/CityInfo";
 import api from "./api/api";
+import TimeZone from "./components/features/CountryInfo/TimeZone";
 
 
 
@@ -139,6 +140,7 @@ function App() {
   return (
     <AppContainer>
       <Navigation>
+        <TimeZone />
         <CountriesList>
           <Navbar setShowSlideOutMenu={setShowSlideOutMenu} />
         </CountriesList>

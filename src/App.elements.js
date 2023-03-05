@@ -12,7 +12,7 @@ export const AppContainer = styled.div`
 export const Navigation = styled.div`
   box-sizing: border-box;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: snow;
   /* padding: 16px; */

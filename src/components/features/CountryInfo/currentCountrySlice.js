@@ -10,6 +10,7 @@ const currentCountrySlice = createSlice({
         countryGeneralInfo: {
 
         },
+        countryTime: {},
         citiesNearBy: {},
         countryFlag: {},
         countryAstronomy: {},
@@ -50,12 +51,15 @@ const currentCountrySlice = createSlice({
         },
         addCities(state, action) {
             state.citiesNearBy = action.payload;
+        },
+        addCountryTime(state, action) {
+            state.countryTime = action.payload;
         }
 
     }
 
 })
-export const { addCurrentCountry, addCurrentIso3, addCities, updateCountryInfo, addFlags, addCountryAstronomy, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
+export const { addCurrentCountry, addCurrentIso3, addCities, addCountryTime, updateCountryInfo, addFlags, addCountryAstronomy, addCurrentIso, addCapital, addWeather, addCovid } = currentCountrySlice.actions;
 export const selectedIso2 = (state) => state.countryInfo.iso_a2
 export const selectedIso3 = (state) => state.countryInfo.iso_a3
 export const selectedCountryName = (state) => state.countryInfo.name
@@ -66,4 +70,5 @@ export const selectCapital = (state) => state.countryInfo.capital;
 export const selectWeatherInfo = (state) => state.countryInfo.weather;
 export const selectCovidInfo = (state) => state.countryInfo.covidInfo;
 export const selectCities = (state) => state.countryInfo.citiesNearBy;
+export const selectCountryTime = (state) => state.countryInfo.countryTime
 export default currentCountrySlice.reducer;

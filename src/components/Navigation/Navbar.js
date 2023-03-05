@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Element
-import { DropdownMenu } from "./Navbar.elements";
+import { DropdownMenu, Time } from "./Navbar.elements";
 
 // Data
 import countryNames from "../../resources/countryBorders.json";
@@ -19,6 +19,12 @@ import {
   addCapital,
 } from "../features/CountryInfo/currentCountrySlice";
 import api from "../../api/api";
+import TimeZone from "../features/CountryInfo/TimeZone";
+
+
+
+
+
 
 const Navbar = ({ setShowSlideOutMenu }) => {
   const countryGeneralInfo = useSelector(selectCountryInfo);
@@ -103,7 +109,10 @@ const Navbar = ({ setShowSlideOutMenu }) => {
             {element.name} ({element.iso_a2})
           </option>
         ))}
+
     </DropdownMenu>
+
+
   );
 };
 

@@ -26,6 +26,10 @@ export const DropdownMenu = styled.select`
   z-index: 20;
   width: fit-content;
   
-
-
 `
+
+
+export const Time = styled.div`
+  display: flex;
+  
+  `
