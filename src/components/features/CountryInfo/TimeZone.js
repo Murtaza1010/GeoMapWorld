@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { TimeContainer, Text } from './TimeZoneElements'
 import { useSelector, useDispatch } from 'react-redux';
 import api from '../../../api/api';
-import { selectCountryTime, addCountryTime, selectedCountryName, selectCapital } from './currentCountrySlice';
+import { selectedTime, addCountryTime, selectedCountryName, selectCapital } from './currentCountrySlice';
 
 
 
@@ -11,22 +11,27 @@ const TimeZone = () => {
     const countryName = useSelector(selectedCountryName)
     const capitalData = useSelector(selectCapital)
     const dispatch = useDispatch()
-    const countryTimeData = useSelector(selectCountryTime)
+    const countryTimeData = useSelector(selectedTime)
+    console.log(countryTimeData)
 
     useEffect(() => {
         async function cTimeApiCall() {
-            if (capitalData) {
-                const resp = await api.countryGeneralInfo.countryTime(capitalData.lat, capitalData.lng)
-                console.log(resp)
+            if (countryName && capitalData) {
+                const resp = await api.countryGeneralInfo.countryTime(capitalData.lat, capitalData.lon)
+
+                if (resp) {
+                    dispatch(addCountryTime(resp))
+                }
             }
         }
         cTimeApiCall()
-    }, [capitalData])
+    }, [countryName, capitalData])
     return (
         <TimeContainer>
             <Text>
-                <h2>"Europe/Vienna"</h2>
-                <h2>2023-03-05 20:44</h2>
+                <h3>{countryTimeData?.timezoneId || ''}</h3>
+
+                <h3>{countryTimeData?.time || ''}</h3>
 
             </Text>
         </TimeContainer>

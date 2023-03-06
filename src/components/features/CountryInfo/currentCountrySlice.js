@@ -4,20 +4,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const currentCountrySlice = createSlice({
     name: 'countryInfo',
     initialState: {
-        name: "Afghanistan",
-        iso_a2: 'AF',
+        name: "United Kingdom",
+        iso_a2: 'GB',
         iso_a3: '',
-        countryGeneralInfo: {
-
-        },
-        countryTime: {},
+        countryGeneralInfo: {},
         citiesNearBy: {},
         countryFlag: {},
         countryAstronomy: {},
-        capital: {
-
-        },
+        capital: {},
         weather: {},
+        countryTime: {},
         covidInfo: {},
 
     },
@@ -70,5 +66,5 @@ export const selectCapital = (state) => state.countryInfo.capital;
 export const selectWeatherInfo = (state) => state.countryInfo.weather;
 export const selectCovidInfo = (state) => state.countryInfo.covidInfo;
 export const selectCities = (state) => state.countryInfo.citiesNearBy;
-export const selectCountryTime = (state) => state.countryInfo.countryTime
+export const selectedTime = (state) => state.countryInfo.countryTime;
 export default currentCountrySlice.reducer;

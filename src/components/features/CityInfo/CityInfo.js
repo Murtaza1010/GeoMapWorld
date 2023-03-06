@@ -23,25 +23,17 @@ const CityInfo = ({ city }) => {
     return (
         <CityInfoContainer>
             <Top>
-                <img src={countryIcon} />{city?.name}
+                <h2>{city?.name}</h2>
+                <img src={countryIcon} />{city?.countrycode}
+                <img src={populationIcon}></img>{city?.population}
 
             </Top>
             <Body>
-
-                <Titles>
-                    <h2>{city?.countrycode}</h2>
-                    <img src={populationIcon}></img>{city?.population}
-
-                </Titles>
-                <Coords>
+                {/* <Coords>
                     <h3>Lat:  {city?.lat}</h3>
                     <h3>Lng: {city?.lng}</h3>
                     <p>wikipedia: {city?.wikipedia}</p>
-                </Coords>
-
-
-
-
+                </Coords> */}
             </Body>
         </CityInfoContainer>
     )

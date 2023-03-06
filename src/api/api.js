@@ -49,8 +49,10 @@ export const countryGeneralInfo = {
 
     },
     async countryTime(lat, lng) {
-        const resp = await fetch(`${timeUrl}lat=${lat}&lng=${lng}&username=${userNameGeoNames}`)
-        const data = checkAndReturn(resp)
+        const resp = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lng}&username=${userNameGeoNames}`)
+        // const data = checkAndReturn(resp)
+        const data = await resp.json()
+        console.log(data)
         return data
 
     },
