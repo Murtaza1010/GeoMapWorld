@@ -20,7 +20,7 @@ async function checkAndReturn(resp) {
 export const countryGeneralInfo = {
     async byCountry(countryIso) { // returns Geo information for a choesen country
         const resp = await fetch(
-            `${countryInfoUrl}${countryIso}&username=${userNameGeoNames}&style=full`,
+            `http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&country=${countryIso}&username=mkarim1&style=full`,
         )
         const data = checkAndReturn(resp)
         return data
@@ -43,13 +43,13 @@ export const countryGeneralInfo = {
     //         .catch(error => console.log('error', error));
     // },
     async countryAstronomy(lat, lng) {
-        const resp = await fetch(`${countryAstronomyApi}apiKey=${countryAstronomyApiKey}&lat=${lat}&long=${lng}`)
+        const resp = await fetch(`https://api.ipgeolocation.io/astronomy?apiKey=566804b505da40af8ae073a89803fdfa&lat=${lat}&long=${lng}`)
         const data = checkAndReturn(resp)
         return data
 
     },
     async countryTime(lat, lng) {
-        const resp = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lng}&username=${userNameGeoNames}`)
+        const resp = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lng}&username=mkarim1`)
         // const data = checkAndReturn(resp)
         const data = await resp.json()
         console.log(data)
@@ -78,7 +78,7 @@ export const countryGeneralInfo = {
     },
     // take lat and lng and return  weather information for the capital city 
     async weatherByCapitalLatLong(lat, lng) {
-        const resp = await fetch(`${weatherInfoUrl}lat=${lat}&lng=${lng}&username=${userNameGeoNames}&style=full`
+        const resp = await fetch(`http://api.geonames.org/findNearByWeatherJSON?formatted=true&lat=${lat}&lng=${lng}&username=mkarim1&style=full`
         )
         const data = checkAndReturn(resp)
 
@@ -86,7 +86,7 @@ export const countryGeneralInfo = {
 
     },
     async citiesNearBy(north, south, east, west) {
-        const resp = await fetch(`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=en&username=${userNameGeoNames}`)
+        const resp = await fetch(`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=en&username=mkarim1`)
         // const data = await resp.json()
         const data = checkAndReturn(resp)
 
