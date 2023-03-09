@@ -5,7 +5,7 @@ const flagApi = process.env.REACT_APP_FLAG_API
 const countryAstronomyApi = process.env.REACT_APP_COUNTRY_ASTRONOMY_API
 const countryAstronomyApiKey = process.env.REACT_APP_COUNTRY_ASTRONOMY_KEY
 const cityUrl = process.env.REACT_APP_CITY_API
-const timeUrl = process.env.REACT_APP_COUNTRY_TIME_API
+// const timeUrl = process.env.REACT_APP_COUNTRY_TIME_API
 
 
 // conerating raw api response to somethign that we can use
